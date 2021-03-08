@@ -1,0 +1,29 @@
+/* 
+    Created on : 23-Feb-2021, 11:51:49
+    Author     : Bong Ma
+*/
+
+*{
+    /*position: relative;*/
+}
+
+.nav{
+    /*overflow: hidden;*/
+    /*background-color: #333;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*width: 100%;*/
+}
+
+.bottom-bar{
+    /*margin-top: 50px;*/
+    /*position: absolute;*/
+    /*top: 50px;*/
+    /*float: left;*/
+    /*display: block;*/
+    /*color: #f2f2f2;*/
+    /*text-align: center;*/
+    /*padding: 14px 16px;*/
+    /*text-decoration: none;*/
+    /*font-size: 17px;*/
+}

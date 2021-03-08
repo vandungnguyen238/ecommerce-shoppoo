@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/security
+                            http://www.springframework.org/schema/security/spring-security.xsd">
+    <!--Them 3 dong 4, 8, 9 ================================================ -->
+
+    <security:http auto-config="false" use-expressions="true">
+        <!--<security:intercept-url pattern="/home" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') or hasRole('ROLE_GUEST')"/>-->
+        <!--<security:intercept-url pattern="/account/*" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') "/>-->
+        <!--<security:intercept-url pattern="/account/edit" access="hasRole('ROLE_ADMIN')"/>--> 
+        <!--<security:intercept-url pattern="/*/delete" access="hasRole('ROLE_ADMIN')"/>-->
+        <!--<security:intercept-url pattern="/products/*" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') or hasRole('ROLE_GUEST')"/>-->
+        <!--<security:intercept-url pattern="/orders/*" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') or hasRole('ROLE_GUEST')"/>-->
+        
+        <security:access-denied-handler error-page="/403"/>
+        
+        <security:form-login login-page="/login" 
+                             login-processing-url="/j_spring_security_check"
+                             authentication-failure-url="/login?error"
+                             username-parameter="username"
+                             password-parameter="password"/>
+  
+        
+        <!--<security:logout  logout-success-url="/login?logout"/>-->
+        <security:logout logout-url="/j_spring_security_logout" 
+                         logout-success-url="/logout"  
+                         delete-cookies="JSESSIONID"
+                         invalidate-session="true" />
+        <!--
+            logout-url:         là của springsecurity; 
+            logout-success-url: là của mình
+        -->
+        <!--        
+        <security:session-management>
+            <security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </security:session-management>
+        -->
+    </security:http>
+
+    
+    <!--============ authentication from database ===========================-->
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider user-service-ref="userDetailsServiceImpl">
+            <security:password-encoder ref="passwordEncoder"/>
+            <!--<password-encoder hash="bcrypt"/>-->
+        </security:authentication-provider>
+    </security:authentication-manager>
+ 
+    <bean id="passwordEncoder" 
+          class="org.springframework.security.crypto.password.NoOpPasswordEncoder" 
+          factory-method="getInstance"/>
+
+</beans>
+<!--================================= FINISH ================================-->
